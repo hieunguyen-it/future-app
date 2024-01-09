@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { Button, Input } from "@components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -13,13 +12,11 @@ import {
 } from "@components/ui";
 import { signUpSchema } from "@schemas";
 import { z } from "zod";
-import { useAuth } from "@hooks/useAuth";
+import { useSignUpMutation } from "@hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const FormSignUp = () => {
-  const [userData, setUserData] = useState<UserRegister>();
-  const { data } = useAuth(userData!);
-
-  console.log("data", data);
+  const {mutate: mutateSignUp, data: dataUser} = useSignUpMutation()
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -30,21 +27,22 @@ const FormSignUp = () => {
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
-    setUserData(values);
+  console.log('dataUser',dataUser)
+
+  const onSubmit = (values: z.infer<typeof signUpSchema>) => {
+    mutateSignUp(values)
   }
   return (
-    <div className="w-[50%]">
+    <div>
       <div className="px-[76px]">
         <p className="text-black-100 text-3xl mt-[50px]">Create an account</p>
         <div className="flex pr-12 pt-4 mb-8">
           <p className="text-black-100">Already have an account?</p>
-          <link href={"/sign-in"} className="ml-2 ">
+          <Link to={"/sign-in"} className="ml-2 ">
             <span className="text-black-200 font-medium underline">
               Sign in
             </span>
-          </link>
+          </Link>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

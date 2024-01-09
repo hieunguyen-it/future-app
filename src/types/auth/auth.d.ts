@@ -1,6 +1,6 @@
 interface UserResponse {
   email: string;
-  username: string;
+  password: string;
 }
 interface UserRegister {
   email: string;

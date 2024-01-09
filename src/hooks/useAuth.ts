@@ -1,38 +1,34 @@
-import AuthService from "@configs/api/auth";
-import { useMutation } from "react-query";
+import AuthService from '@configs/api/auth'
+import { useMutation } from '@tanstack/react-query'
 
-export const useAuth = (
-  user: UserRegister,
-  onSuccess?: onSuccessQuery,
-  onError?: onErrorQuery
-) => {
-  const signUpMutation = () => AuthService.signUp(user);
+export const useSignUpMutation = () => {
+
+    return useMutation({
+        mutationFn: async (variables: UserRegister) => {
+            return await AuthService.signUp(variables);
+        },
+        onSuccess: (user) => {
+            console.log('data12122',user)
+        },
+        onError: (error) => {
+            console.log('error',error)
+        }
+    });
+}
+
+export const useSignInMutation = () => {
+
+    return useMutation({
+        mutationFn: async (variables: UserResponse) => {
+            return await AuthService.signIn(variables);
+        },
+        onSuccess: (user) => {
+            console.log('data12122',user)
+        },
+        onError: (error) => {
+            console.log('error',error)
+        }
+    });
+}
 
 
-//   return useMutation(
-//     async ({ email, password, username }) => {
-//       // Call API to submit login data 
-//       const response = await fetch('/api/login', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ email, password, username})  
-//       })
-
-//       return response.json()
-//     },
-//     {
-//       onSuccess: () => {
-//         // Invalidate and refetch any queries that depends on user login state
-//         queryClient.invalidateQueries('user') 
-//       },
-//     }
-//   )
-
-  return useMutation("signUp", signUpMutation, {
-    onSuccess,
-    onError,
-  });
-
-};
