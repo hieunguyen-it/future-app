@@ -1,11 +1,11 @@
-import axios from "axios";
-const { VITE_BASE_URL } = process.env;
+import axios from 'axios'
+const { VITE_BASE_URL } = process.env
 
 const apiClient = axios.create({
-  baseURL: VITE_BASE_URL,
-});
+    baseURL: VITE_BASE_URL
+})
 
-console.log('VITE_BASE_URL',VITE_BASE_URL)
+console.log('VITE_BASE_URL', VITE_BASE_URL)
 
 // request interceptor to add token to request headers
 // apiClient.interceptors.request.use(
@@ -34,4 +34,4 @@ console.log('VITE_BASE_URL',VITE_BASE_URL)
 //   }
 // );
 
-export default apiClient;
+export default apiClient

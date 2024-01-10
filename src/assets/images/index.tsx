@@ -1,4 +1,4 @@
-import bgLogin from "./bg-login.png";
-import bgSignIn from "./bg-signIn.png";
+import bgLogin from './bg-login.png'
+import bgSignIn from './bg-signIn.png'
 
-export const Images = { bgLogin, bgSignIn };
+export const Images = { bgLogin, bgSignIn }

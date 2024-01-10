@@ -1,2 +1,2 @@
-export * from "./google-logo";
-export * from "./twiter-logo";
+export * from './google-logo'
+export * from './twiter-logo'
